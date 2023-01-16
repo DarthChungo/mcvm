@@ -8,12 +8,6 @@
 #declare objective mcvm.vars global variables
 scoreboard objectives add mcvm.vars dummy
 
-#declare objective mcvm.fun function io variables
-scoreboard objectives add mcvm.fun dummy
-
-#declare objective mcvm.args argument passing object
-scoreboard objectives add mcvm.args dummy
-
 #declare storage mcvm:vm main storage object
 
 # Set default config values
@@ -34,6 +28,7 @@ scoreboard players reset $min_ram_size mcvm.vars
 scoreboard players reset $max_stack_size mcvm.vars
 scoreboard players reset $auto_step mcvm.vars
 
+function mcvm:priv/modules/bus/load
 function mcvm:priv/modules/ram/load
 
 tellraw @a[tag=mcvm.info] [{"text": "MC", "color": "aqua"},{"text": "VM", "color": "dark_aqua"},{"text": " INFO. ", "color": "white"},{"text": "Finished loading", "color": "white"}]
