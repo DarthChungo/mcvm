@@ -19,15 +19,19 @@ scoreboard objectives add mcvm.args dummy
 # Set default config values
 
 execute store result score $max_ram_size mcvm.vars run data get storage mcvm:vm vm.config.max_ram_size
-execute store result score $max_size_size mcvm.vars run data get storage mcvm:vm vm.config.max_size_size
+execute store result score $min_ram_size mcvm.vars run data get storage mcvm:vm vm.config.min_ram_size
+execute store result score $max_stack_size mcvm.vars run data get storage mcvm:vm vm.config.max_stack_size
 execute store result score $auto_step mcvm.vars run data get storage mcvm:vm vm.config.auto_step
 
-execute unless score $max_ram_size mcvm.vars matches 16.. run data modify storage mcvm:vm vm.config.max_ram_size set value 16
-execute unless score $max_size_size mcvm.vars matches 16.. run data modify storage mcvm:vm vm.config.max_size_size set value 16
+execute unless score $max_ram_size mcvm.vars matches 256.. run data modify storage mcvm:vm vm.config.max_ram_size set value 256
+execute unless score $min_ram_size mcvm.vars matches 16..256 run data modify storage mcvm:vm vm.config.min_ram_size set value 16
+execute unless score $max_stack_size mcvm.vars matches 16.. run data modify storage mcvm:vm vm.config.max_stack_size set value 16
 execute unless score $auto_step mcvm.vars matches 1 run data modify storage mcvm:vm vm.config.auto_step set value 0
 
+#opt
 scoreboard players reset $max_ram_size mcvm.vars
-scoreboard players reset $max_size_size mcvm.vars
+scoreboard players reset $min_ram_size mcvm.vars
+scoreboard players reset $max_stack_size mcvm.vars
 scoreboard players reset $auto_step mcvm.vars
 
 function mcvm:priv/modules/ram/load
