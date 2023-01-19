@@ -5,4 +5,6 @@ data remove storage mcvm:vm ram
 
 function mcvm:priv/modules/ram/clear
 
-tellraw @a[tag=mcvm.info] [{"text": "MC", "color": "aqua"},{"text": "VM", "color": "dark_aqua"},{"text": " INFO. ", "color": "white"},{"text": "RAM module loaded", "color": "white"}]
+scoreboard players set $level mcvm.vars 2
+data modify storage mcvm:int root.msg set value "RAM module loaded"
+function mcvm:priv/util/log

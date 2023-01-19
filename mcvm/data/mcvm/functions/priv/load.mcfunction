@@ -1,12 +1,16 @@
 #> mcvm:priv/load
 # Main load function
 
-#declare tag mcvm.info receive info, warn and error messages
-#declare tag mcvm.warn receive warn and error messages
-#declare tag mcvm.error receive only error messages
+#declare tag mcvm.loglevel.3 receive debug, info, warn and error messages
+#declare tag mcvm.loglevel.2 receive info, warn and error messages
+#declare tag mcvm.loglevel.1 receive warn and error messages
+#declare tag mcvm.loglevel.0 receive only error messages
 
 #declare objective mcvm.vars global variables
 scoreboard objectives add mcvm.vars dummy
+
+#declare storage mcvm:int internal storage
+data remove storage mcvm:int root
 
 #declare storage mcvm:vm main storage object
 
@@ -31,4 +35,6 @@ scoreboard players reset $auto_step mcvm.vars
 function mcvm:priv/modules/bus/load
 function mcvm:priv/modules/ram/load
 
-tellraw @a[tag=mcvm.info] [{"text": "MC", "color": "aqua"},{"text": "VM", "color": "dark_aqua"},{"text": " INFO. ", "color": "white"},{"text": "Finished loading", "color": "white"}]
+scoreboard players set $level mcvm.vars 2
+data modify storage mcvm:int root.msg set value "Finished loading"
+function mcvm:priv/util/log
