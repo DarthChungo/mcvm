@@ -26,6 +26,10 @@ execute unless score $min_ram_size mcvm.vars matches 16..256 run data modify sto
 execute unless score $max_stack_size mcvm.vars matches 16.. run data modify storage mcvm:vm vm.config.max_stack_size set value 16
 execute unless score $auto_step mcvm.vars matches 1 run data modify storage mcvm:vm vm.config.auto_step set value 0
 
+scoreboard players set $level mcvm.vars 2
+data modify storage mcvm:int root.msg set value "Loading MCVM ver 1.0.0"
+function mcvm:priv/util/log
+
 scoreboard players set $level mcvm.vars 3
 data modify storage mcvm:int root.msg set value "Call load"
 function mcvm:priv/util/log
