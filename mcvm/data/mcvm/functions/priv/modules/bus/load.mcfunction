@@ -1,6 +1,10 @@
 #> mcvm:priv/modules/bus/load
 # Buses load function
 
+scoreboard players set $level mcvm.vars 3
+data modify storage mcvm:int root.msg set value "Call bus/load"
+function mcvm:priv/util/log
+
 data remove storage mcvm:vm vm.bus
 
 data modify storage mcvm:vm vm.bus.regs_a set value 0
