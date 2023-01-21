@@ -9,36 +9,19 @@
 #declare objective mcvm.vars global variables
 scoreboard objectives add mcvm.vars dummy
 
-#declare storage mcvm:int internal storage
-data remove storage mcvm:int root
+#declare storage mcvm:vm main storage
+#declare storage mcvm:io internal function io storage
 
-#declare storage mcvm:vm main storage object
+# Config
 
-# Set default config values
+execute store result score $ram_size mcvm.vars run data get storage mcvm:vm vm.config.ram_size
+execute store result score $stack_size mcvm.vars run data get storage mcvm:vm vm.config.ram_size
 
-execute store result score $max_ram_size mcvm.vars run data get storage mcvm:vm vm.config.max_ram_size
-execute store result score $min_ram_size mcvm.vars run data get storage mcvm:vm vm.config.min_ram_size
-execute store result score $max_stack_size mcvm.vars run data get storage mcvm:vm vm.config.max_stack_size
-execute store result score $auto_step mcvm.vars run data get storage mcvm:vm vm.config.auto_step
-
-execute unless score $max_ram_size mcvm.vars matches 256.. run data modify storage mcvm:vm vm.config.max_ram_size set value 256
-execute unless score $min_ram_size mcvm.vars matches 16..256 run data modify storage mcvm:vm vm.config.min_ram_size set value 16
-execute unless score $max_stack_size mcvm.vars matches 16.. run data modify storage mcvm:vm vm.config.max_stack_size set value 16
-execute unless score $auto_step mcvm.vars matches 1 run data modify storage mcvm:vm vm.config.auto_step set value 0
-
-scoreboard players set $level mcvm.vars 2
-data modify storage mcvm:int root.msg set value "Loading MCVM ver 1.0.0"
-function mcvm:priv/util/log
-
-scoreboard players set $level mcvm.vars 3
-data modify storage mcvm:int root.msg set value "Call load"
-function mcvm:priv/util/log
+execute unless score $ram_size mcvm.vars matches 16..1024 run data modify storage mcvm:vm vm.config.ram_size set value 16
+execute unless score $stack_size mcvm.vars matches 16..1024 run data modify storage mcvm:vm vm.config.stack_size set value 16
 
 # Load modules
 
-function mcvm:priv/modules/bus/load
 function mcvm:priv/modules/ram/load
 
-scoreboard players set $level mcvm.vars 2
-data modify storage mcvm:int root.msg set value "Finished loading"
-function mcvm:priv/util/log
+say finish load
