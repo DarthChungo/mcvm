@@ -3,6 +3,9 @@
 # IN in.pos
 # IN in.bus (0 a, 1 b)
 
+data modify storage mcvm:io in.name set value "ram/get"
+function mcvm:priv/misc/log_entry
+
 data modify storage mcvm:vars r.ram_copy set from storage mcvm:vm vm.ram.data
 execute store result score $i mcvm.vars run data get storage mcvm:io in.pos
 
