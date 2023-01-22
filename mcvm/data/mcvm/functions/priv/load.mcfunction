@@ -7,22 +7,26 @@
 #declare tag mcvm.loglevel.0 receive only error messages
 
 #declare objective mcvm.vars global variables
-scoreboard objectives add mcvm.vars dummy
 
 #declare storage mcvm:vm main storage
-data merge storage mcvm:vm {}
-
 #declare storage mcvm:io internal function io storage
-data merge storage mcvm:io {in:{},out:{}}
-
 #declare storage mcvm:vars internal variable storage
-data merge storage mcvm:vars {r:{}}
 
 # Reset state and preserve config
+
+data remove storage mcvm:io in
+data remove storage mcvm:io out
+data merge storage mcvm:io {in:{},out:{}}
+
+data remove storage mcvm:vars r
+data merge storage mcvm:vars {r:{}}
 
 data modify storage mcvm:vars r.config set from storage mcvm:vm vm.config
 data remove storage mcvm:vm vm
 data modify storage mcvm:vm vm.config set from storage mcvm:vars r.config
+
+scoreboard objectives add mcvm.vars dummy
+scoreboard players reset * mcvm.vars
 
 # Config
 
