@@ -36,11 +36,6 @@ execute store result score $stack_size mcvm.vars run data get storage mcvm:vm vm
 execute unless score $ram_size mcvm.vars matches 16..1024 run data modify storage mcvm:vm vm.config.ram_size set value 16
 execute unless score $stack_size mcvm.vars matches 16..1024 run data modify storage mcvm:vm vm.config.stack_size set value 16
 
-# Log
-
-data modify storage mcvm:io in.name set value "load"
-function mcvm:priv/misc/log_entry
-
 # Load modules
 
 function mcvm:priv/modules/bus/load
