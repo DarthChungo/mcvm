@@ -40,5 +40,6 @@ execute unless score $stack_size mcvm.vars matches 16..1024 run data modify stor
 
 function mcvm:priv/modules/bus/load
 function mcvm:priv/modules/ram/load
+function mcvm:priv/modules/regs/load
 
 say finish load
