@@ -1,10 +1,7 @@
 #> mcvm:priv/modules/regs/get
 # Get a value form a register
-# IN in.bus (0 a, 1 b)
-# IN in.reg (0 a, 1 b, 2 c, 3 d, 4 e, 5 f, 6 g, 7 h)
-
-execute store result score $bus mcvm.vars run data get storage mcvm:io in.bus
-execute store result score $reg mcvm.vars run data get storage mcvm:io in.reg
+# IN $bus (0 a, 1 b)
+# IN $reg (0 a, 1 b, 2 c, 3 d, 4 e, 5 f, 6 g, 7 h)
 
 execute if score $reg mcvm.vars matches 0 if score $bus mcvm.vars matches 0 run data modify storage mcvm:vm vm.bus.a set from storage mcvm:vm vm.regs.a 
 execute if score $reg mcvm.vars matches 1 if score $bus mcvm.vars matches 0 run data modify storage mcvm:vm vm.bus.a set from storage mcvm:vm vm.regs.b 
